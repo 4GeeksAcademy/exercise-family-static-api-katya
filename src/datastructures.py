@@ -54,12 +54,16 @@ class FamilyStructure:
         return self._members
 
     def delete_member(self, id):
-        # fill this method and update the return
-        pass
+        for i, member in enumerate(self._members):
+            if member['id'] == id:
+                del self._members[i]
+        return self._members
 
     def get_member(self, id):
-        # fill this method and update the return
-        pass
+        for i, member in enumerate(self._members):
+            if member['id'] == id:
+                return self._members[i]
+        
 
     # this method is done, it returns a list with all the family members
     def get_all_members(self):

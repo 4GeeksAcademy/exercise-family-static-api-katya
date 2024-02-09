@@ -38,13 +38,36 @@ def handle_hello():
 @app.route('/members', methods=['POST'])
 def handle_add_member():
     member = request.json
-    jackson_family.add_member(member)
+    new_member = jackson_family.add_member(member)
    
     response_body = {
         'message': 'Member added successfully',
+        'member': new_member
+    }
+    return jsonify(response_body), 200
+
+@app.route('/members/<int:member_id>', methods=['DELETE'])
+def handle_delete_member(member_id):
+    members = jackson_family.get_all_members()
+    jackson_family.delete_member(member_id)
+   
+    response_body = {
+        'message': 'Member deleted successfully',
+        'member': members
+    }
+    return jsonify(response_body), 200
+
+@app.route('/members/<int:member_id>', methods=['GET'])
+def handle_get_member(member_id):
+    
+    member =jackson_family.get_member(member_id)
+   
+    response_body = {
         'member': member
     }
     return jsonify(response_body), 200
+
+
 
 # this only runs if `$ python src/app.py` is executed
 if __name__ == '__main__':
