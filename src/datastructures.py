@@ -1,4 +1,4 @@
-
+from random import randint
 """
 update this file to implement the following already declared methods:
 - add_member: Should add a member to the self._members list
@@ -33,23 +33,10 @@ class FamilyStructure:
 
     # read-only: Use this method to generate random members ID's when adding members into the list
     def _generateId(self):
-        generated_id = self._next_id
-        self._next_id += 1
-        return generated_id
+        return  randint(0, 99999999)
 
     def add_member(self, member):
         
-        first_name = member['first_name']
-        age = member['age']
-        lucky_numbers = member['lucky_numbers']
-
-        member = {
-            'first_name': first_name,
-            'age': age,
-            'lucky_numbers': lucky_numbers
-        }
-
-        member['id'] = self._generateId()
         self._members.append(member)
         return self._members
 
@@ -62,7 +49,8 @@ class FamilyStructure:
     def get_member(self, id):
         for i, member in enumerate(self._members):
             if member['id'] == id:
-                return self._members[i]
+                return member
+        return None
         
 
     # this method is done, it returns a list with all the family members
